@@ -6,7 +6,8 @@
 
 **Ayoub HAMMAD · 2025–2026**
 
-A comparative machine-learning framework for **SOC estimation** in Electric Vehicle (EV) Intelligent Battery Management Systems (iBMS), benchmarking five architectures on the NASA Battery Dataset under a strict zero data-leakage protocol.
+A comparative machine-learning framework for **State of Charge (SOC) estimation** in intelligent Battery Management Systems (BMS), benchmarking five model architectures on the NASA Battery Dataset under a strict zero-data-leakage protocol.
+
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![TensorFlow 2.x](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?logo=tensorflow&logoColor=white)](https://tensorflow.org/)
