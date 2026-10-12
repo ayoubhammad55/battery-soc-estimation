@@ -6,14 +6,14 @@
 
 **Ayoub HAMMAD · 2025–2026**
 
-A machine-learning project developed as part of my master's thesis, focusing on **State of Charge (SOC) estimation** for Battery Management Systems (BMS). This repository benchmarks five machine-learning architectures on the NASA Battery Dataset, comparing prediction accuracy, generalization to a held-out battery, and inference time.
+A machine-learning project developed as part of my master's thesis, focusing on **State of Charge (SOC) estimation** for Battery Management Systems (BMS). This repository benchmarks five machine-learning models on the NASA Battery Dataset, comparing prediction accuracy on a held-out battery and reported inference time.
 
 *This repository covers the SOC estimation component only. It does not contain the complete autonomous robot, intelligent BMS, or wireless charging system developed as part of the master's thesis.*
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue?logo=python\&logoColor=white)](https://www.python.org/)
-[![TensorFlow 2.x](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?logo=tensorflow\&logoColor=white)](https://tensorflow.org/)
-[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.4+-F7931E?logo=scikit-learn\&logoColor=white)](https://scikit-learn.org/)
-[![NASA Dataset](https://img.shields.io/badge/Dataset-NASA%20Battery-0B3D91?logo=nasa\&logoColor=white)](https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![TensorFlow 2.x](https://img.shields.io/badge/TensorFlow-2.x-FF6F00?logo=tensorflow&logoColor=white)](https://tensorflow.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.4+-F7931E?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![NASA Dataset](https://img.shields.io/badge/Dataset-NASA%20Battery-0B3D91?logo=nasa&logoColor=white)](https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset)
 
 </div>
 
@@ -21,16 +21,16 @@ A machine-learning project developed as part of my master's thesis, focusing on 
 
 ## 📋 Table of Contents
 
-* [Project Scope](#-project-scope)
-* [Key Highlights](#-key-highlights)
-* [Results](#-results)
-* [Visualizations](#️-visualizations)
-* [Repository Structure](#-repository-structure)
-* [Quick Start](#-quick-start)
-* [Architecture Details](#️-architecture-details)
-* [Experimental Protocol](#-experimental-protocol)
-* [Data](#-data)
-* [References](#-references)
+- [Project Scope](#-project-scope)
+- [Key Highlights](#-key-highlights)
+- [Results](#-results)
+- [Visualizations](#️-visualizations)
+- [Repository Structure](#-repository-structure)
+- [Quick Start](#-quick-start)
+- [Architecture Details](#️-architecture-details)
+- [Experimental Protocol](#-experimental-protocol)
+- [Data](#-data)
+- [References](#-references)
 
 ---
 
@@ -40,7 +40,7 @@ My master's thesis, *Design and Implementation of an Autonomous Service Robot wi
 
 This repository focuses specifically on the **machine-learning component for battery SOC estimation**.
 
-The objective is to compare different model architectures for estimating battery SOC from electrical and thermal measurements. The project includes data processing, SOC reference calculation, model training, evaluation, and result visualization.
+The objective is to compare different model architectures for estimating battery SOC from electrical and thermal measurements. The workflow includes data processing, reference SOC calculation using Coulomb Counting, model training, evaluation, and result visualization.
 
 The broader thesis also covered the autonomous robot platform, battery monitoring, wireless charging, and system integration. Those components are outside the scope of this repository.
 
@@ -48,12 +48,13 @@ The broader thesis also covered the autonomous robot platform, battery monitorin
 
 ## ✨ Key Highlights
 
-* **Five-model benchmark** — Transformer, BiLSTM, LSTM, Random Forest, and Support Vector Regression (SVR).
-* **SOC reference estimation** — Coulomb Counting applied to battery discharge-cycle measurements.
-* **Battery-level evaluation** — separate training, validation, and test batteries to assess generalization to an unseen battery.
-* **Comprehensive evaluation** — RMSE, MAE, R², maximum absolute error, and inference time.
-* **Deep learning and classical ML comparison** — sequence-based neural networks compared with traditional machine-learning models.
-* **Reproducible workflow** — training scripts, evaluation code, result tables, and visualizations.
+- **Five-model benchmark:** Transformer, LSTM, BiLSTM, Random Forest, and Support Vector Regression (SVR).
+- **SOC reference calculation:** Coulomb Counting applied to battery discharge-cycle measurements.
+- **Battery-level evaluation:** Separate training, validation, and test batteries to evaluate performance on an unseen battery.
+- **Multiple evaluation metrics:** RMSE, MAE, R², maximum absolute error, and reported inference time.
+- **Deep learning versus classical ML:** Sequence-based neural networks compared with traditional machine-learning models.
+- **Reproducible workflow:** Training scripts, evaluation utilities, result tables, and visualizations.
+- **Deployment considerations:** Model performance and artifact size can be considered together when evaluating deployment options.
 
 ---
 
@@ -61,39 +62,60 @@ The broader thesis also covered the autonomous robot platform, battery monitorin
 
 ### Test Battery: B0006 (Held Out)
 
-The following table presents the reported performance of the five models on test battery B0006.
+The following results are from the reported evaluation on test battery B0006.
 
-| Model             | RMSE (%) ↓ | MAE (%) ↓ |       R² ↑ | Max Error (%) ↓ |
-| :---------------- | ---------: | --------: | ---------: | --------------: |
-| **Random Forest** |   **4.33** |  **3.09** | **0.9768** |           17.01 |
-| Transformer       |       5.33 |      4.16 |     0.9648 |       **15.92** |
-| SVR               |       9.21 |      7.07 |     0.8950 |           36.19 |
-| BiLSTM            |       9.50 |      6.86 |     0.8882 |           25.70 |
-| LSTM              |      10.61 |      7.63 |     0.8604 |           27.94 |
+| Model | RMSE ↓ | MAE ↓ | R² ↑ | Max Error ↓ |
+|:--|--:|--:|--:|--:|
+| **Random Forest** | **4.33** | **3.09** | **0.9768** | 17.01 |
+| Transformer | 5.33 | 4.16 | 0.9648 | **15.92** |
+| SVR | 9.21 | 7.07 | 0.8950 | 36.19 |
+| BiLSTM | 9.50 | 6.86 | 0.8882 | 25.70 |
+| LSTM | 10.61 | 7.63 | 0.8604 | 27.94 |
 
-SOC errors are expressed in percentage points on a 0–100% SOC scale. Lower RMSE, MAE, and maximum absolute error indicate smaller prediction errors, while higher R² indicates a better fit to the reference values.
+RMSE, MAE, and maximum error are expressed in **SOC percentage points** on a 0–100% scale. Lower error values are better, while a higher R² indicates a better fit to the reference values.
 
-**Key observation:** Random Forest achieves the lowest RMSE and MAE and the highest R² in these results. The Transformer has the lowest maximum absolute error. The best model therefore depends on the evaluation metric and any deployment constraints.
+**Key observations**
 
-### Inference Time
+- **Random Forest** achieves the lowest test RMSE and MAE and the highest R² among the five models.
+- **Transformer** has the lowest maximum absolute error in this evaluation.
+- **SVR** performs better on the test battery than either recurrent neural network, although its validation results differ substantially from its test results.
+- The best model depends on the evaluation metric, model size, computational requirements, and deployment environment.
 
-Reported average inference time over 100 runs for a single sample.
+These results evaluate predictions against SOC reference values calculated using Coulomb Counting. They should not be interpreted as measurements against an independently established, error-free SOC ground truth.
 
-| Model         | Average Inference Time (ms) |
-| :------------ | --------------------------: |
-| SVR           |                        6.25 |
-| Random Forest |                       45.56 |
-| Transformer   |                       75.92 |
-| LSTM          |                       76.82 |
-| BiLSTM        |                       79.52 |
+### Validation results
 
-Inference time depends on the hardware, software environment, and measurement procedure. These measurements alone do not establish suitability for a particular embedded platform.
+Validation was performed on battery B0018.
+
+| Model | RMSE ↓ | MAE ↓ | R² ↑ | Max Error ↓ |
+|:--|--:|--:|--:|--:|
+| Transformer | 3.18 | 2.15 | 0.9867 | 13.76 |
+| LSTM | 3.78 | 2.98 | 0.9811 | 10.64 |
+| BiLSTM | 5.20 | 3.96 | 0.9643 | 16.41 |
+| Random Forest | 7.26 | 5.24 | 0.9303 | 23.41 |
+| SVR | 31.54 | 26.65 | -0.3145 | 60.21 |
+
+SVR's validation performance is substantially worse than its test performance. This suggests that performance may vary across batteries and warrants further investigation before drawing conclusions about generalization.
+
+### Reported inference time
+
+| Model | Average Inference Time (ms) |
+|:--|--:|
+| SVR | 6.25 |
+| Random Forest | 45.56 |
+| Transformer | 75.92 |
+| LSTM | 76.82 |
+| BiLSTM | 79.52 |
+
+These are the reported average inference times for a single sample over 100 runs. The hardware and detailed timing methodology are not documented here, so the measurements should be treated as benchmark results rather than verified latency on a specific embedded platform.
+
+Inference time can depend on the hardware, software environment, model implementation, preprocessing, and measurement procedure.
 
 ---
 
 ## 🖼️ Visualizations
 
-### All Models — SOC Prediction on Test Battery B0006
+### All models: SOC prediction on test battery B0006
 
 <div align="center">
 <img src="assets/plots/soc_model_prediction_comparison_all_models.png" width="90%" alt="SOC prediction comparison across all five models on test battery B0006"/>
@@ -101,7 +123,7 @@ Inference time depends on the hardware, software environment, and measurement pr
 
 ---
 
-### Metrics Comparison
+### Metrics comparison
 
 <div align="center">
 <table>
@@ -111,14 +133,14 @@ Inference time depends on the hardware, software environment, and measurement pr
 </tr>
 <tr>
 <td align="center"><img src="assets/plots/soc_model_r2_comparison.png" width="100%" alt="R-squared comparison"/><br/><b>R²</b></td>
-<td align="center"><img src="assets/plots/soc_model_max_error_comparison.png" width="100%" alt="Maximum error comparison"/><br/><b>Maximum Absolute Error</b></td>
+<td align="center"><img src="assets/plots/soc_model_max_error_comparison.png" width="100%" alt="Maximum absolute error comparison"/><br/><b>Maximum Absolute Error</b></td>
 </tr>
 </table>
 </div>
 
 ---
 
-### Error Distribution Across Models
+### Error distributions
 
 <div align="center">
 <table>
@@ -182,7 +204,7 @@ Inference time depends on the hardware, software environment, and measurement pr
 
 ---
 
-### Coulomb Counting SOC Reference
+### Coulomb Counting SOC reference
 
 <div align="center">
 <img src="assets/plots/soc_coulomb_counted_sample.png" width="75%" alt="Example SOC reference estimated using Coulomb Counting"/>
@@ -202,7 +224,7 @@ battery-soc-estimation/
 │   └── plots/
 │       └── ...                       # Result visualizations
 ├── models/
-│   └── README.md                     # Model information and retraining notes
+│   └── README.md                     # Model artifacts and loading notes
 ├── notebooks/
 │   └── soc_estimation_all_models.ipynb
 ├── results/
@@ -222,7 +244,7 @@ battery-soc-estimation/
 └── requirements.txt
 ```
 
-The raw dataset and trained model files are not included in the repository. Dataset files must be downloaded separately.
+The raw dataset and trained model files are excluded from version control. Download the dataset separately before running the training pipeline. Trained model artifacts can be regenerated using the training script.
 
 ---
 
@@ -235,7 +257,7 @@ git clone https://github.com/ayoubhammad55/battery-soc-estimation.git
 cd battery-soc-estimation
 ```
 
-### 2. Install dependencies
+### 2. Set up the environment
 
 Python 3.10 or later is recommended, subject to the package versions specified in `requirements.txt`.
 
@@ -268,7 +290,7 @@ pip install -r requirements.txt
 
 Download the dataset from [Kaggle — NASA Battery Dataset](https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset).
 
-Extract the files into the directory expected by `src/config.py`. The intended layout is:
+Place the extracted dataset in the location configured in `src/config.py`. The expected layout is:
 
 ```text
 data/
@@ -279,17 +301,17 @@ data/
         └── ...
 ```
 
-Confirm the exact filenames, directory structure, and configured data path against the downloaded dataset and `src/config.py` before training.
+The exact directory structure and filenames must match the dataset loader's expectations.
 
 ### 4. Train the models
 
-Train all configured models:
+Train all five models:
 
 ```bash
 python -m src.train
 ```
 
-Train a specific model:
+Train a single model:
 
 ```bash
 python -m src.train --model transformer
@@ -299,7 +321,15 @@ python -m src.train --model svr
 python -m src.train --model random_forest
 ```
 
-These commands assume that the training script supports the specified options and model names.
+To see the available options:
+
+```bash
+python -m src.train --help
+```
+
+The training script runs the data pipeline, saves the fitted scalers, trains the selected model or models, evaluates them on the validation and test sets, and writes the comparison metrics to `results/all_models_comparison_metrics.csv`.
+
+**Note:** Training the full benchmark can require substantial memory and processing time, particularly for Random Forest and SVR. The original saved model files are not included in the repository.
 
 ---
 
@@ -307,14 +337,16 @@ These commands assume that the training script supports the specified options an
 
 ### Transformer Encoder
 
-The reported Transformer configuration uses sequences of 30 timesteps, with four input features per timestep.
+The Transformer processes a sequence of 30 timesteps with four input features per timestep.
 
 ```text
 Input (30 timesteps × 4 features)
   → Dense projection (d_model = 64)
   → Sinusoidal positional encoding
-  → 2 × [Multi-Head Self-Attention (4 heads)
-         + Feed-Forward Network (128 dimensions)]
+  → 2 × [
+       Multi-Head Self-Attention (4 heads)
+       Feed-Forward Network (128 dimensions)
+    ]
   → Dropout (0.2)
   → Last-token readout
   → Dense(64, ReLU)
@@ -324,7 +356,7 @@ Input (30 timesteps × 4 features)
 ### LSTM
 
 ```text
-Input
+Input sequence
   → LSTM(48, L2 regularization)
   → Dropout(0.3)
   → LSTM(24, L2 regularization)
@@ -336,7 +368,7 @@ Input
 ### BiLSTM
 
 ```text
-Input
+Input sequence
   → BiLSTM(40, L2 regularization)
   → Dropout(0.35)
   → BiLSTM(20, L2 regularization)
@@ -347,37 +379,41 @@ Input
 
 ### Support Vector Regression and Random Forest
 
-SVR and Random Forest operate on flattened input sequences. With 30 timesteps and four features per timestep, each input sample contains 120 features.
+SVR and Random Forest use flattened input sequences. Each sample therefore contains 120 features: 30 timesteps multiplied by four input features.
+
+The SVR is trained on a deterministic random subset of at most 80,000 training windows. Random Forest uses the generated training windows.
 
 ---
 
 ## 📐 Experimental Protocol
 
-The following settings summarize the reported experimental configuration. Verify them against `src/config.py` and the training code before treating them as a definitive reproduction specification.
+The following table summarizes the configuration in the project code.
 
-| Setting            | Value                                                 |
-| :----------------- | :---------------------------------------------------- |
-| Dataset            | NASA Battery Dataset                                  |
-| SOC reference      | Coulomb Counting                                      |
-| Input features     | Voltage, current, temperature, and elapsed time (Δt)  |
-| Sequence length    | 30 timesteps                                          |
-| Training batteries | B0005, B0007, B0028, B0032, B0034, B0045–B0049, B0054 |
-| Validation battery | B0018                                                 |
-| Test battery       | B0006                                                 |
-| Feature scaling    | MinMaxScaler, fitted on training data only            |
-| Optimizer          | Adam                                                  |
-| Learning rate      | 3 × 10⁻⁴                                              |
-| Loss function      | Mean Squared Error (MSE)                              |
-| Maximum epochs     | 100                                                   |
-| Early stopping     | Patience of 12 epochs                                 |
-| Batch size         | 64                                                    |
-| Random seed        | 42                                                    |
+| Setting | Value |
+|:--|:--|
+| Dataset | NASA Battery Dataset |
+| SOC reference | Coulomb Counting |
+| Input features | Voltage, current, temperature, and elapsed time (Δt) |
+| Sequence length | 30 timesteps |
+| Training batteries | B0005, B0007, B0028, B0032, B0034, B0045, B0046, B0047, B0048, B0049, B0054 |
+| Validation battery | B0018 |
+| Test battery | B0006 |
+| Feature scaling | MinMaxScaler fitted on training data |
+| Optimizer | Adam for deep-learning models |
+| Loss function | Mean Squared Error (MSE) |
+| Maximum epochs | 100 |
+| Early stopping | Validation-loss patience of 12 epochs |
+| Learning-rate reduction | Factor of 0.5, patience of 5 epochs, minimum learning rate of 1e-6 |
+| Batch size | 64 for deep-learning models |
+| Random seed | 42 |
 
-### Evaluation and Data Leakage
+The sequence builder generates windows with a stride of one timestep. SOC reference values are calculated from discharge-cycle current integration using the capacity recorded in the dataset metadata for each cycle.
 
-Separating training, validation, and test data by battery helps evaluate generalization to a battery not used for model fitting. The scaler should be fitted on training data only, and test-battery information should not influence preprocessing, training, or model selection.
+### Evaluation and data leakage
 
-A complete leakage assessment also requires checking sequence construction, preprocessing that learns from data, hyperparameter tuning, and overlapping time windows. The battery-level split is an important safeguard, but it should not be treated as proof of zero leakage without verifying the implementation.
+The split separates batteries rather than randomly distributing windows from the same battery across training, validation, and test sets. This helps evaluate performance on a battery not used for model fitting.
+
+The feature and target scalers are fitted on the training split and then applied to the validation and test splits. Nevertheless, battery-level separation alone does not establish that every possible source of data leakage has been eliminated. Preprocessing, model selection, and the construction of reference SOC values should also be considered when interpreting the results.
 
 ---
 
@@ -385,20 +421,16 @@ A complete leakage assessment also requires checking sequence construction, prep
 
 The raw NASA Battery Dataset is **not included in this repository**.
 
-Download it from:
+- **Kaggle:** [NASA Battery Dataset](https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset)
+- **NASA PCoE:** [Prognostics Center of Excellence Data Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/)
 
-* **Kaggle:** [NASA Battery Dataset](https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset)
-* **NASA PCoE:** [Prognostics Center of Excellence Data Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/)
-
-After downloading, place the data in the directory configured by the project. Check `src/config.py` if your local directory structure differs from the example above.
+Download the dataset separately and arrange the files according to the paths expected by `src/config.py`.
 
 ---
 
 ## 📚 References
 
 1. Saha, B., and Goebel, K. (2007). *Battery Data Set*. NASA Ames Prognostics Data Repository. [NASA PCoE Data Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/).
-
-2. Xia, B., et al. (2018). *State of charge estimation using optimized Levenberg–Marquardt wavelet neural network*. **Energy**. Verify the complete bibliographic details against the original publication before using this citation in formal research.
 
 ---
 
