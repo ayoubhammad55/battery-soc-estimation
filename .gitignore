@@ -1,0 +1,40 @@
+# Raw and processed datasets
+/data/
+
+# Academic references
+/assets/thesis_ref/
+
+# Trained models and scalers
+/models/*.keras
+/models/*.h5
+/models/*.joblib
+/models/*.pkl
+
+# Python environments and artifacts
+__pycache__/
+*.py[cod]
+*.class
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+.env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and temporary outputs
+*.log
+*.tmp
+soc_saved_outputs/
