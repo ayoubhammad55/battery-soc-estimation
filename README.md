@@ -4,7 +4,7 @@
 
 # Battery State of Charge (SOC) Estimation
 
-**Master's Thesis · Ayoub HAMMAD · 2025–2026**
+**Ayoub HAMMAD · 2025–2026**
 
 A comparative machine-learning framework for **SOC estimation** in Electric Vehicle (EV) Intelligent Battery Management Systems (iBMS), benchmarking five architectures on the NASA Battery Dataset under a strict zero data-leakage protocol.
 
