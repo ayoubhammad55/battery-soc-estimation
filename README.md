@@ -1,4 +1,4 @@
- <div align="center">
+<div align="center">
 
 <img src="assets/banner.png" alt="Battery SOC Estimation Banner" width="100%"/>
 
@@ -31,6 +31,7 @@ A machine-learning project developed as part of my master's thesis, focusing on 
 - [Experimental Protocol](#-experimental-protocol)
 - [Data](#-data)
 - [References](#-references)
+- [License](#-license)
 
 ---
 
@@ -240,6 +241,7 @@ battery-soc-estimation/
 │   ├── model.py                      # Model definitions
 │   └── train.py                      # Training entry point
 ├── .gitignore
+├── LICENSE
 ├── README.md
 └── requirements.txt
 ```
@@ -341,40 +343,40 @@ The Transformer processes a sequence of 30 timesteps with four input features pe
 
 ```text
 Input (30 timesteps × 4 features)
-  → Dense projection (d_model = 64)
-  → Sinusoidal positional encoding
-  → 2 × [
-       Multi-Head Self-Attention (4 heads)
-       Feed-Forward Network (128 dimensions)
-    ]
-  → Dropout (0.2)
-  → Last-token readout
-  → Dense(64, ReLU)
-  → Dense(1)
+ → Dense projection (d_model = 64)
+ → Sinusoidal positional encoding
+ → 2 × [
+      Multi-Head Self-Attention (4 heads)
+      Feed-Forward Network (128 dimensions)
+   ]
+ → Dropout (0.2)
+ → Last-token readout
+ → Dense(64, ReLU)
+ → Dense(1)
 ```
 
 ### LSTM
 
 ```text
 Input sequence
-  → LSTM(48, L2 regularization)
-  → Dropout(0.3)
-  → LSTM(24, L2 regularization)
-  → Dropout(0.3)
-  → Dense(16, ReLU)
-  → Dense(1)
+ → LSTM(48, L2 regularization)
+ → Dropout(0.3)
+ → LSTM(24, L2 regularization)
+ → Dropout(0.3)
+ → Dense(16, ReLU)
+ → Dense(1)
 ```
 
 ### BiLSTM
 
 ```text
 Input sequence
-  → BiLSTM(40, L2 regularization)
-  → Dropout(0.35)
-  → BiLSTM(20, L2 regularization)
-  → Dropout(0.35)
-  → Dense(16, ReLU)
-  → Dense(1)
+ → BiLSTM(40, L2 regularization)
+ → Dropout(0.35)
+ → BiLSTM(20, L2 regularization)
+ → Dropout(0.35)
+ → Dense(16, ReLU)
+ → Dense(1)
 ```
 
 ### Support Vector Regression and Random Forest
@@ -431,6 +433,14 @@ Download the dataset separately and arrange the files according to the paths exp
 ## 📚 References
 
 1. Saha, B., and Goebel, K. (2007). *Battery Data Set*. NASA Ames Prognostics Data Repository. [NASA PCoE Data Repository](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/).
+
+---
+
+## 📄 License
+
+The original code in this repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for the full license text.
+
+Third-party datasets, libraries, and other materials remain subject to their respective licenses and terms of use. The MIT License does not grant additional rights to redistribute or use those materials.
 
 ---
 
